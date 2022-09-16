@@ -3,6 +3,7 @@ import { seed } from './db/init'
 import { customerRouter } from './api/routes/customer'
 import { tablesRouter } from './api/routes/tables'
 import { displayRouter } from './api/routes/display'
+const cors = require('cors')
 
 
 
@@ -14,7 +15,7 @@ function loggerMiddleware(request: express.Request, response: express.Response, 
     console.log(`${request.method} ${request.path}`)
     next()
 }
-
+app.use(cors())
 app.use(loggerMiddleware)
 // Body parsing Middleware
 app.use(express.json());

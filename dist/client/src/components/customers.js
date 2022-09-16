@@ -8,20 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.displayRouter = void 0;
-const express_1 = __importDefault(require("express"));
-exports.displayRouter = express_1.default.Router();
-const customer_1 = __importDefault(require("../../db/models/customer"));
-exports.displayRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let data = yield customer_1.default.findAll();
-    let allNames = data.map(getAllNames);
-    function getAllNames(name) {
-        return name.firstName + ' ' + name.lastName;
+exports.Names = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const Names = () => {
+    const [allNames, setAllNames] = (0, react_1.useState)([]);
+    function getNames() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield fetch('http://localhost:8000/display');
+            const data = yield res.json();
+            setAllNames(data);
+        });
     }
-    console.log(data);
-    res.send(data);
-}));
+    (0, react_1.useEffect)(() => {
+        getNames();
+    }, []);
+    return ((0, jsx_runtime_1.jsx)("div", { children: allNames }));
+};
+exports.Names = Names;

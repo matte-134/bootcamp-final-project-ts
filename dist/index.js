@@ -17,6 +17,7 @@ const init_1 = require("./db/init");
 const customer_1 = require("./api/routes/customer");
 const tables_1 = require("./api/routes/tables");
 const display_1 = require("./api/routes/display");
+const cors = require('cors');
 const app = (0, express_1.default)();
 const port = 8000;
 (0, init_1.seed)();
@@ -24,6 +25,7 @@ function loggerMiddleware(request, response, next) {
     console.log(`${request.method} ${request.path}`);
     next();
 }
+app.use(cors());
 app.use(loggerMiddleware);
 // Body parsing Middleware
 app.use(express_1.default.json());

@@ -6,7 +6,7 @@ import Customer from '../../db/models/customer'
 customerRouter.post("/", async (req, res) => {
     await Customer.create(req.body)
     console.log(req.body)
-    res.send("Customer added")
+    res.send("Customer added now")
 })
 
 // GET /customer (by first name)

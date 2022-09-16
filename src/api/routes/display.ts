@@ -8,5 +8,6 @@ displayRouter.get("/", async (req, res) => {
     function getAllNames (name: any) {
         return name.firstName + ' ' + name.lastName
     } 
-    res.send(allNames)
+    console.log(data)
+    res.send(data)
 })

@@ -20,7 +20,7 @@ const customer_1 = __importDefault(require("../../db/models/customer"));
 exports.customerRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield customer_1.default.create(req.body);
     console.log(req.body);
-    res.send("Customer added");
+    res.send("Customer added now");
 }));
 // GET /customer (by first name)
 exports.customerRouter.get("/:firstName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
