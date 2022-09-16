@@ -12,13 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.waitingRouter = void 0;
+exports.displayRouter = void 0;
 const express_1 = __importDefault(require("express"));
-exports.waitingRouter = express_1.default.Router();
-const waitinglist_1 = __importDefault(require("../../db/models/waitinglist"));
-// ADD WAITING LIST // /waiting
-exports.waitingRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield waitinglist_1.default.create(req.body);
-    console.log(req.body);
-    res.send("Customer added");
+exports.displayRouter = express_1.default.Router();
+const customer_1 = __importDefault(require("../../db/models/customer"));
+exports.displayRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let data = yield customer_1.default.findAll();
+    let allNames = data.map(getAllNames);
+    function getAllNames(name) {
+        return name.firstName + ' ' + name.lastName;
+    }
+    res.send(allNames);
 }));

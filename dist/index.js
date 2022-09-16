@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const init_1 = require("./db/init");
 const customer_1 = require("./api/routes/customer");
 const tables_1 = require("./api/routes/tables");
+const display_1 = require("./api/routes/display");
 const app = (0, express_1.default)();
 const port = 8000;
 (0, init_1.seed)();
@@ -29,6 +30,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/customer', customer_1.customerRouter);
 app.use('/tables', tables_1.tablesRouter);
+app.use('/display', display_1.displayRouter);
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).send('Welcome');
 }));

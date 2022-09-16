@@ -2,6 +2,7 @@ import express, { Application, Request, Response, Router } from 'express'
 import { seed } from './db/init'
 import { customerRouter } from './api/routes/customer'
 import { tablesRouter } from './api/routes/tables'
+import { displayRouter } from './api/routes/display'
 
 
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/customer', customerRouter)
 app.use('/tables', tablesRouter)
+app.use('/display', displayRouter)
 app.get('/', async(req: Request, res: Response): Promise<Response> => {
     return res.status(200).send('Welcome')
 })
