@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.App = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 require("./App.css");
@@ -20,7 +19,7 @@ function App() {
     const [button, setButton] = (0, react_1.useState)(false);
     const [oneCust, setOneCust] = (0, react_1.useState)('');
     const [showAdd, setShowAdd] = (0, react_1.useState)(false);
-    const [custInfo, setCustInfo] = (0, react_1.useState)({});
+    const [customer, setCustomer] = (0, react_1.useState)({});
     const showList = () => __awaiter(this, void 0, void 0, function* () {
         const res = yield fetch('http://localhost:8000/display');
         const data = yield res.json();
@@ -31,15 +30,16 @@ function App() {
     const showButton = (firstName) => __awaiter(this, void 0, void 0, function* () {
         const res = yield fetch(`http://localhost:8000/customer/${firstName}`);
         const data = yield res.json();
-        // console.log(data[0].firstName)
+        // console.log(data[0].id)
         setOneCust(data[0].firstName + ' ' + data[0].lastName + ' ' + data[0].partyNumber);
         setButton(!button);
         setCustomerList([]);
-        setCustInfo(data[0]);
+        setCustomer(data[0]);
+        // console.log(custInfo)
     });
     const addToTable = () => {
         setShowAdd(!showAdd);
     };
-    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "App" }, { children: (0, jsx_runtime_1.jsx)(form_1.Form, {}) })), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("h1", { children: "View Waiting List" }), (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: () => showList() }, { children: "Waiting List" }))] }), (0, jsx_runtime_1.jsxs)("div", { children: [customerList.map(customer => (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: customer.firstName, onClick: () => showButton(customer.firstName) }, { children: [customer.firstName, " ", customer.lastName, " ", customer.partyNumber] }))), oneCust, button ? (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: () => addToTable() }, { children: "Add to Table" })) : null, showAdd ? (0, jsx_runtime_1.jsx)(addToTable_1.AddToTable, Object.assign({}, custInfo)) : null] })] }));
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "App" }, { children: (0, jsx_runtime_1.jsx)(form_1.Form, {}) })), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("h1", { children: "View Waiting List" }), (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: () => showList() }, { children: "Waiting List" }))] }), (0, jsx_runtime_1.jsxs)("div", { children: [customerList.map(customer => (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: customer.firstName, onClick: () => showButton(customer.firstName) }, { children: [customer.firstName, " ", customer.lastName, " ", customer.partyNumber] }))), oneCust, button ? (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: () => addToTable() }, { children: "Add to Table" })) : null, showAdd ? (0, jsx_runtime_1.jsx)(addToTable_1.AddToTable, Object.assign({}, customer)) : null] })] }));
 }
-exports.App = App;
+exports.default = App;

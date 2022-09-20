@@ -22,10 +22,9 @@ const Customer = db.define<CustomerInstance>(
     {
         id: {
             allowNull: false,
-            autoIncrement: false, 
             primaryKey: true,
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4
+            autoIncrement: true,
+            type: DataTypes.INTEGER,
         },
         firstName: {
             allowNull: false, 

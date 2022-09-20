@@ -18,8 +18,8 @@ const Tables = db.define<TablesInterface>(
     {
         tableNumber: {
             allowNull: false,
-            autoIncrement: false, 
-            primaryKey: true,
+            // autoIncrement: false, 
+            unique: true,
             type: DataTypes.NUMBER
         },
         capacity: {
@@ -33,8 +33,8 @@ const Tables = db.define<TablesInterface>(
     }
 )
 
-Customer.hasOne(Tables, {foreignKey: 'tables'})
-Tables.belongsTo(Customer)
+Customer.hasOne(Tables)
+Tables.belongsTo(Customer, {foreignKey: 'CustomerId'})
 
 
 export default Tables

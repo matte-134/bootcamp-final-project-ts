@@ -6,10 +6,9 @@ const _1 = require(".");
 const Customer = _1.db.define('Customer', {
     id: {
         allowNull: false,
-        autoIncrement: false,
         primaryKey: true,
-        type: sequelize_1.DataTypes.UUID,
-        defaultValue: sequelize_1.UUIDV4
+        autoIncrement: true,
+        type: sequelize_1.DataTypes.INTEGER,
     },
     firstName: {
         allowNull: false,

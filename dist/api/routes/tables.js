@@ -24,10 +24,9 @@ exports.tablesRouter.put('/:tableNumber', (req, res) => __awaiter(void 0, void 0
             tableNumber: req.params.tableNumber
         }
     });
-    yield foundTable.setCustomer(req.body);
-    yield foundTable.update({
-        occupied: true
-    });
+    console.log(req.body);
+    let foundCustomer = yield customer_1.default.findByPk(req.body.id);
+    yield foundTable.setCustomer(foundCustomer);
     res.send("Customer added to table");
 }));
 // GET customer info from table

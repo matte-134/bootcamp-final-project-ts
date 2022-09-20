@@ -13,10 +13,9 @@ tablesRouter.put('/:tableNumber', async (req, res) => {
         tableNumber: req.params.tableNumber
     }
     })
-    await foundTable.setCustomer(req.body)
-    await foundTable.update({
-        occupied: true
-    })
+    console.log(req.body)
+    let foundCustomer: any = await Customer.findByPk(req.body.id)
+    await foundTable.setCustomer(foundCustomer)
     res.send("Customer added to table")
 })
 
