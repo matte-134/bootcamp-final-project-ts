@@ -5,27 +5,34 @@ import { Names } from './components/customers';
 import { Form } from './components/form';
 import { AddToTable } from './components/addToTable';
 
-function App() {
+export function App() {
   const [customerList, setCustomerList] = useState<any[]>([])
   const [button, setButton] = useState<boolean>(false)
+  const [oneCust, setOneCust] = useState<string>('')
+  const [showAdd, setShowAdd] = useState<boolean>(false)
+  const [custInfo, setCustInfo] = useState<object>({})
  
 
   const showList = async () => {
     const res = await fetch('http://localhost:8000/display')
     const data: any = await res.json()
     setCustomerList(data)
+    setOneCust('')
+    setButton(false)
     }
 
-  const showButton = () => {
+  const showButton = async (firstName: string) => {
+    const res = await fetch(`http://localhost:8000/customer/${firstName}`)
+    const data = await res.json()
+    // console.log(data[0].firstName)
+    setOneCust(data[0].firstName + ' ' + data[0].lastName + ' ' + data[0].partyNumber)
     setButton(!button)
+    setCustomerList([])
+    setCustInfo(data[0])
   }
 
   const addToTable = () => {
-    return (
-      <div>
-        <AddToTable />
-      </div>
-    )
+    setShowAdd(!showAdd)
   }
   
 
@@ -40,10 +47,12 @@ function App() {
       <button onClick={() => showList()}>Waiting List</button>
     </div>
     <div>
-      {customerList.map(customer => <div id={customer.firstName} onClick={() => showButton()}>{customer.firstName} {customer.lastName} {button ? <button onClick={() => <AddToTable />}>Add to Table</button> : null} </div>)} 
+      {customerList.map(customer => <div id={customer.firstName} onClick={() => showButton(customer.firstName)}>{customer.firstName} {customer.lastName} {customer.partyNumber}</div>)}
+      {oneCust} 
+      {button ? <button onClick={() => addToTable()}>Add to Table</button> : null}
+      {showAdd ? <AddToTable {...custInfo}/> : null}
     </div>
     </div>
   );
 }
 
-export default App;

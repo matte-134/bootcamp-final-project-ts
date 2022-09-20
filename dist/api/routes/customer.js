@@ -24,10 +24,10 @@ exports.customerRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0,
 }));
 // GET /customer (by first name)
 exports.customerRouter.get("/:firstName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let findName = req.params.firstName.charAt(0).toUpperCase() + req.params.firstName.slice(1);
+    // let findName: string = req.params.firstName.charAt(0).toUpperCase() + req.params.firstName.slice(1)
     let names = yield customer_1.default.findAll({
         where: {
-            firstName: findName
+            firstName: req.params.firstName
         }
     });
     res.send(names);

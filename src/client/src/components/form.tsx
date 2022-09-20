@@ -4,6 +4,7 @@ export const Form = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [partyNumber, setPartyNumber] = useState<number>(0)
 
     const handleSubmit = (ev: any) => {
         ev.preventDefault()
@@ -14,13 +15,14 @@ export const Form = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({'firstName': firstName, 'lastName': lastName, 'email': email})
+                body: JSON.stringify({'firstName': firstName, 'lastName': lastName, 'email': email, 'partyNumber': partyNumber})
             })
         }
         postCustomer()
         setFirstName('')
         setLastName('')
         setEmail('')
+        setPartyNumber(0)
     }
     
 
@@ -40,6 +42,16 @@ export const Form = () => {
             </div>
             <div>
                 <input type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+            </div>
+            <div>
+                <select onChange={e => setPartyNumber(parseInt(e.target.value))}>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                </select>
             </div>
             <button>Sumbit</button>
             </form>

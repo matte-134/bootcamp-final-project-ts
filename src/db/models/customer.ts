@@ -6,6 +6,7 @@ interface CustomerAttributes {
     firstName: string;
     lastName: string;
     email: string;
+    partyNumber: number;
 }
 
 interface CustomerCreationAttributes extends Optional<CustomerAttributes, 'id'> {}
@@ -24,7 +25,6 @@ const Customer = db.define<CustomerInstance>(
             autoIncrement: false, 
             primaryKey: true,
             type: DataTypes.UUID,
-            unique: true,
             defaultValue: UUIDV4
         },
         firstName: {
@@ -38,6 +38,10 @@ const Customer = db.define<CustomerInstance>(
         email: {
             allowNull: false, 
             type: DataTypes.TEXT,
+        },
+        partyNumber: {
+            allowNull: false,
+            type: DataTypes.INTEGER
         }
     }
 )

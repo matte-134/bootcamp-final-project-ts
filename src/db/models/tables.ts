@@ -20,8 +20,7 @@ const Tables = db.define<TablesInterface>(
             allowNull: false,
             autoIncrement: false, 
             primaryKey: true,
-            type: DataTypes.NUMBER,
-            unique: true,
+            type: DataTypes.NUMBER
         },
         capacity: {
             allowNull: false, 
@@ -34,7 +33,7 @@ const Tables = db.define<TablesInterface>(
     }
 )
 
-Customer.hasOne(Tables)
+Customer.hasOne(Tables, {foreignKey: 'tables'})
 Tables.belongsTo(Customer)
 
 

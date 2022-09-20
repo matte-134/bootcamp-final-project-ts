@@ -11,10 +11,10 @@ customerRouter.post("/", async (req, res) => {
 
 // GET /customer (by first name)
 customerRouter.get("/:firstName", async (req, res) => {
-    let findName: string = req.params.firstName.charAt(0).toUpperCase() + req.params.firstName.slice(1)
+    // let findName: string = req.params.firstName.charAt(0).toUpperCase() + req.params.firstName.slice(1)
     let names = await Customer.findAll({
         where: {
-            firstName: findName
+            firstName: req.params.firstName
         }
     })
     res.send(names)

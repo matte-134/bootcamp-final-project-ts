@@ -24,12 +24,7 @@ exports.tablesRouter.put('/:tableNumber', (req, res) => __awaiter(void 0, void 0
             tableNumber: req.params.tableNumber
         }
     });
-    let foundCustomer = yield customer_1.default.findOne({
-        where: {
-            firstName: 'Lucy'
-        }
-    });
-    yield foundTable.setCustomer(foundCustomer);
+    yield foundTable.setCustomer(req.body);
     yield foundTable.update({
         occupied: true
     });
@@ -89,7 +84,7 @@ exports.tablesRouter.get('/unoccupied/find', (req, res) => __awaiter(void 0, voi
     // function getTableCapacity (table: any): Array<number> {
     //     return table.capacity
     // }
-    res.send(tables);
+    res.send(unoccupied);
 }));
 // GET tables that are occupied
 exports.tablesRouter.get('/occupied/find', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

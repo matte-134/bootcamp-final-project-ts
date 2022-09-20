@@ -13,12 +13,7 @@ tablesRouter.put('/:tableNumber', async (req, res) => {
         tableNumber: req.params.tableNumber
     }
     })
-    let foundCustomer: any = await Customer.findOne({
-        where: {
-            firstName: 'Lucy'
-        }
-    })
-    await foundTable.setCustomer(foundCustomer)
+    await foundTable.setCustomer(req.body)
     await foundTable.update({
         occupied: true
     })
@@ -82,7 +77,7 @@ tablesRouter.get('/unoccupied/find', async (req, res) => {
     // function getTableCapacity (table: any): Array<number> {
     //     return table.capacity
     // }
-    res.send(tables)
+    res.send(unoccupied)
 })
 
 // GET tables that are occupied

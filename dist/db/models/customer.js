@@ -9,7 +9,6 @@ const Customer = _1.db.define('Customer', {
         autoIncrement: false,
         primaryKey: true,
         type: sequelize_1.DataTypes.UUID,
-        unique: true,
         defaultValue: sequelize_1.UUIDV4
     },
     firstName: {
@@ -23,6 +22,10 @@ const Customer = _1.db.define('Customer', {
     email: {
         allowNull: false,
         type: sequelize_1.DataTypes.TEXT,
+    },
+    partyNumber: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.INTEGER
     }
 });
 exports.default = Customer;
