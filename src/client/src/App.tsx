@@ -17,6 +17,7 @@ export default function App() {
   const [showTableHead, setShowTableHead] = useState<boolean>(false)
   const [showCustInfoState, setShowCustInfoState] = useState<any[]>([])
   const [header, setHeader] = useState<string>('Welcome')
+  const [tNum, setTNum] = useState<number>(0)
 
   const showList = async () => {
     const res = await fetch('http://localhost:8000/display')
@@ -28,6 +29,7 @@ export default function App() {
     setShowAdd(false)
     setShowWaitHead(true)
     setShowTableHead(false)
+    setShowCustInfoState([])
     setHeader('Waiting List')
     }
 
@@ -38,8 +40,10 @@ export default function App() {
     setCustomerList([])
     setOneCust([])
     setButton(false)
+    setShowAdd(false)
     setShowWaitHead(false)
     setShowTableHead(true)
+    setShowCustInfoState([])
     setHeader('Tables List')
   }
 
@@ -58,11 +62,20 @@ export default function App() {
     const res = await fetch(`http://localhost:8000/tables/${tNumber}`)
     try {
       const data: any = await res.json()
-      console.log(data)
       setShowCustInfoState(data)
+      setTableList(tableList.slice(tNumber - 1, tNumber))
+      setTNum(tNumber)
      } catch (error) {
       alert('This table is unoccupied')
      }
+  }
+
+  const removeFromTable = async () => {
+    const res = await fetch(`http://localhost:8000/tables/${tNum}/remove`, {
+      method: 'PUT'
+    })
+    setShowCustInfoState([])
+    showTables()
   }
 
   const addToTable = () => {
@@ -88,9 +101,14 @@ export default function App() {
           <div className='rowT' id={tables.tableNumber} onClick={() => showCustInfo(tables.tableNumber)}>
             <div className='columnT'>{tables.tableNumber}</div>
             <div className='columnT'>{tables.capacity}</div>
-            <div className='columnT'>{tables.occupied ? "Yes" : "No"}</div>
+            <div className='columnT'>{tables.occupied ? <span>&#10003;</span> : <span>&#10008;</span>}</div>
           </div>)}
-          {showCustInfoState.map(customer => <div>{customer.firstName} {customer.lastName}</div>)}
+          {showCustInfoState.map(customer => 
+          <div className='custInfo'>
+            <div>{customer.firstName} {customer.lastName}</div>
+            <div>Party size: {customer.partyNumber}</div>
+            <button className='addButton' onClick={() => removeFromTable()}>Remove from table</button>
+          </div>)}
           {customerList.map(customer => 
           <div className='rowW' id={customer.firstName} onClick={() => showButton(customer.id)}>
             <div className='columnW'>{customer.firstName} {customer.lastName}</div>

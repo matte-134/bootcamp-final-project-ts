@@ -58,16 +58,11 @@ exports.tablesRouter.put('/:tableNumber/remove', (req, res) => __awaiter(void 0,
             tableNumber: req.params.tableNumber
         }
     });
-    if (foundTable.occupied === true) {
-        yield foundTable.setCustomer(null);
-        yield foundTable.update({
-            occupied: false
-        });
-        res.send("Customer removed from table");
-    }
-    else {
-        res.send("Table unoccupied");
-    }
+    yield foundTable.setCustomer(null);
+    yield foundTable.update({
+        occupied: false
+    });
+    res.end();
 }));
 // GET tables 
 exports.tablesRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

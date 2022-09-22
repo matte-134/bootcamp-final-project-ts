@@ -30,22 +30,16 @@ export const Form = () => {
 
 
     return (
-        <div className='addCustomer'>
-            <form onSubmit={handleSubmit}>
-            <h2>
+        <div >
+            <form className='addCustomer' onSubmit={handleSubmit}>
+            <h2 className='heading'>
                 Add Customer to Waiting List
             </h2>
-            <div>
-                <input className='inputField' type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
-            </div>
-            <div>
-                <input className='inputField' type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)} required/>
-            </div>
-            <div>
-                <input className='inputField' type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
-            </div>
-            <div className='tableOptions'>
-                <select onChange={e => setPartyNumber(parseInt(e.target.value))}>
+            <div className='inputField'>
+                <input className='addButtonI' type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
+                <input className='addButtonI' type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)} required/>
+                <input className='addButtonI' type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <select className='addButtonI' onChange={e => setPartyNumber(parseInt(e.target.value))}>
                     <option>Select Party Size</option>
                     <option value={1}>1</option>
                     <option value={2}>2</option>
@@ -54,8 +48,8 @@ export const Form = () => {
                     <option value={5}>5</option>
                     <option value={6}>6</option>
                 </select>
+                <button className='addButtonI'>Submit</button>
             </div>
-            <button>Sumbit</button>
             </form>
         </div>
     )

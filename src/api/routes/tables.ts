@@ -50,16 +50,13 @@ tablesRouter.put('/:tableNumber/remove', async (req, res) => {
             tableNumber: req.params.tableNumber
         }
     })
-    if(foundTable.occupied === true) {
-        await foundTable.setCustomer(null)
-        await foundTable.update({
-            occupied: false
-        })
-        res.send("Customer removed from table")
-    } else {
-        res.send("Table unoccupied")
-    }
-})
+    await foundTable.setCustomer(null)
+    await foundTable.update({
+        occupied: false
+    })
+    res.end()
+ })
+
 
 
 // GET tables 

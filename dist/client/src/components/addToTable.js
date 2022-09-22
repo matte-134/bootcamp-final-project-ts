@@ -55,6 +55,6 @@ const AddToTable = (customer) => {
         postToTable(tNumber, custInfo);
         updateWaitingStatus(custInfo);
     };
-    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ onSubmit: e => handleSubmit(e, customer) }, { children: [(0, jsx_runtime_1.jsxs)("select", Object.assign({ onChange: e => setTNumber(e.target.value) }, { children: [(0, jsx_runtime_1.jsx)("option", { children: "Select Table Number" }), options.map(table => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: table.tableNumber }, { children: table.tableNumber })))] })), (0, jsx_runtime_1.jsx)("button", { children: "Submit" })] })) }));
+    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ className: 'addButtonQ', onSubmit: e => handleSubmit(e, customer) }, { children: [(0, jsx_runtime_1.jsxs)("select", Object.assign({ className: 'addButtonQ', onChange: e => setTNumber(e.target.value) }, { children: [(0, jsx_runtime_1.jsx)("option", { children: "Select Table Number" }), options.map(table => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: table.tableNumber }, { children: table.tableNumber })))] })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'addButtonQ' }, { children: "Submit" }))] })) }));
 };
 exports.AddToTable = AddToTable;

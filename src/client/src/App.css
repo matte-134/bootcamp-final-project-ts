@@ -115,3 +115,12 @@
   justify-content: center;
   margin: 20pt;
 }
+
+.custInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5pt;
+  padding: 5pt;
+  border: #282c34 10pt solid;
+}
