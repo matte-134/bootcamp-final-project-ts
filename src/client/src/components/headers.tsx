@@ -6,6 +6,7 @@ export function WaitingHeader() {
         <div className='headRowW'>
             <div className='headColumnW'>Customer's Name</div>
             <div className='headColumnW'>Party Size</div>
+            <div className='headColumnW'>Time Added</div>
         </div>
     )
 }

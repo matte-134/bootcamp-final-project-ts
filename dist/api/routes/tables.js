@@ -58,9 +58,16 @@ exports.tablesRouter.put('/:tableNumber/remove', (req, res) => __awaiter(void 0,
             tableNumber: req.params.tableNumber
         }
     });
+    let customer = foundTable.CustomerId;
+    console.log(customer);
     yield foundTable.setCustomer(null);
     yield foundTable.update({
         occupied: false
+    });
+    yield customer_1.default.destroy({
+        where: {
+            id: customer
+        }
     });
     res.end();
 }));

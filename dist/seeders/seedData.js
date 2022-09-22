@@ -47,6 +47,31 @@ exports.tables = [
         capacity: 4,
         occupied: false,
     },
+    {
+        tableNumber: 10,
+        capacity: 2,
+        occupied: false,
+    },
+    {
+        tableNumber: 11,
+        capacity: 2,
+        occupied: false,
+    },
+    {
+        tableNumber: 12,
+        capacity: 4,
+        occupied: false,
+    },
+    {
+        tableNumber: 13,
+        capacity: 6,
+        occupied: false,
+    },
+    {
+        tableNumber: 14,
+        capacity: 6,
+        occupied: false,
+    },
 ];
 exports.employee = [
     {

@@ -11,12 +11,11 @@
 
 .addCustomer {
     display: flex;
-    align-items: center;
     flex-direction: row;
     background-color: rgb(141, 141, 242);
     border: solid black 4px;
     margin: 4px;
-    justify-content: center;
+    justify-content: space-between;
     padding: 10px;
 }
 
@@ -35,4 +34,12 @@
     font-size: 30px;
     justify-content: space-around;
     text-align: center;
+    
   }
+
+  .div {
+    display: flex;
+    width: clamp(500pt, 50%, 400pt);
+    justify-content: center;
+  }
+

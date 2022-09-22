@@ -20,7 +20,7 @@ const Tables = _1.db.define('Tables', {
     occupied: {
         defaultValue: false,
         type: sequelize_1.DataTypes.BOOLEAN,
-    }
+    },
 });
 customer_1.default.hasOne(Tables);
 Tables.belongsTo(customer_1.default, { foreignKey: 'CustomerId' });

@@ -50,9 +50,16 @@ tablesRouter.put('/:tableNumber/remove', async (req, res) => {
             tableNumber: req.params.tableNumber
         }
     })
+    let customer = foundTable.CustomerId
+    console.log(customer)
     await foundTable.setCustomer(null)
     await foundTable.update({
         occupied: false
+    })
+    await Customer.destroy({
+        where: {
+            id: customer
+        }
     })
     res.end()
  })

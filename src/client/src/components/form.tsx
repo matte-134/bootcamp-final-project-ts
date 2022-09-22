@@ -6,6 +6,7 @@ export const Form = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [partyNumber, setPartyNumber] = useState<number>(0)
+    const [drop, setDrop] = useState<string>('')
 
     const handleSubmit = (ev: any) => {
         ev.preventDefault()
@@ -23,6 +24,7 @@ export const Form = () => {
         setFirstName('')
         setLastName('')
         setEmail('')
+        setDrop('')
         setPartyNumber(0)
     }
     
@@ -30,7 +32,7 @@ export const Form = () => {
 
 
     return (
-        <div >
+        <div className='div'>
             <form className='addCustomer' onSubmit={handleSubmit}>
             <h2 className='heading'>
                 Add Customer to Waiting List
@@ -39,8 +41,8 @@ export const Form = () => {
                 <input className='addButtonI' type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
                 <input className='addButtonI' type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)} required/>
                 <input className='addButtonI' type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
-                <select className='addButtonI' onChange={e => setPartyNumber(parseInt(e.target.value))}>
-                    <option>Select Party Size</option>
+                <select className='addButtonI' onChange={e => setPartyNumber(parseInt(e.target.value))} required>
+                    <option value={drop} label='Select Party Size' selected disabled></option>
                     <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>

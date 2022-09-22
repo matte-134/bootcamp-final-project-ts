@@ -1,6 +1,7 @@
 import express from "express";
 export const displayRouter = express.Router()
 import Customer from "../../db/models/customer";
+import sequelize from 'sequelize'
 
 displayRouter.get("/", async (req, res) => {
     let data = await Customer.findAll({

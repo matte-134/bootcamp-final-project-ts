@@ -29,7 +29,8 @@ const Tables = db.define<TablesInterface>(
         occupied: {
             defaultValue: false,
             type: DataTypes.BOOLEAN,
-        }
+        },
+        
     }
 )
 

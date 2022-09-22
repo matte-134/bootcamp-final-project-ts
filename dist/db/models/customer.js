@@ -24,12 +24,26 @@ const Customer = _1.db.define('Customer', {
     },
     partyNumber: {
         allowNull: false,
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.INTEGER,
     },
     waiting: {
         allowNull: false,
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    createdAt: {
+        get() {
+            var date = new Date(this.getDataValue('createdAt'));
+            return date.toLocaleTimeString();
+        },
+        type: sequelize_1.DataTypes.DATE,
+    },
+    updatedAt: {
+        get() {
+            var date = new Date(this.getDataValue('updatedAt'));
+            return date.toLocaleTimeString();
+        },
+        type: sequelize_1.DataTypes.DATE,
     }
 });
 exports.default = Customer;

@@ -5,6 +5,7 @@ import { Names } from './components/customers';
 import { Form } from './components/form';
 import { AddToTable } from './components/addToTable';
 import { TableHeader, WaitingHeader } from './components/headers';
+import { DateTime } from 'luxon'
 
 export default function App() {
   const [customerList, setCustomerList] = useState<any[]>([])
@@ -18,6 +19,7 @@ export default function App() {
   const [showCustInfoState, setShowCustInfoState] = useState<any[]>([])
   const [header, setHeader] = useState<string>('Welcome')
   const [tNum, setTNum] = useState<number>(0)
+
 
   const showList = async () => {
     const res = await fetch('http://localhost:8000/display')
@@ -98,7 +100,7 @@ export default function App() {
         {showWaitHead ? <WaitingHeader /> : null}
         {showTableHead ? <TableHeader /> : null}
         {tableList.map(tables => 
-          <div className='rowT' id={tables.tableNumber} onClick={() => showCustInfo(tables.tableNumber)}>
+          <div className={tables.occupied ? "red" : "green"} id={tables.tableNumber} onClick={() => showCustInfo(tables.tableNumber)}>
             <div className='columnT'>{tables.tableNumber}</div>
             <div className='columnT'>{tables.capacity}</div>
             <div className='columnT'>{tables.occupied ? <span>&#10003;</span> : <span>&#10008;</span>}</div>
@@ -107,17 +109,20 @@ export default function App() {
           <div className='custInfo'>
             <div>{customer.firstName} {customer.lastName}</div>
             <div>Party size: {customer.partyNumber}</div>
+            <div>Customer added to Table at: {customer.updatedAt}</div>
             <button className='addButton' onClick={() => removeFromTable()}>Remove from table</button>
           </div>)}
           {customerList.map(customer => 
-          <div className='rowW' id={customer.firstName} onClick={() => showButton(customer.id)}>
+          <div className={customer.id % 2 === 0 ? "even" : "odd" } id={customer.firstName} onClick={() => showButton(customer.id)}>
             <div className='columnW'>{customer.firstName} {customer.lastName}</div>
             <div className='columnWP'>{customer.partyNumber}</div>
+            <div className='columnWP'>{customer.createdAt}</div>
           </div>)}
           {oneCust.map(customer => 
           <div className='rowW'>
             <div className='columnW'>{customer.firstName} {customer.lastName}</div>
             <div className='columnWP'>{customer.partyNumber}</div>
+            <div className='columnWP'>{customer.createdAt}</div>
           </div>)}
     </div>
     <div className='buttonDiv'>

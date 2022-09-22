@@ -7,15 +7,17 @@ interface CustomerAttributes {
     lastName: string;
     email: string;
     partyNumber: number;
-    waiting: boolean
+    waiting: boolean;
+    createdAt: Date;
+    updatedAt: Date
 }
 
 interface CustomerCreationAttributes extends Optional<CustomerAttributes, 'id'> {}
 
 interface CustomerInstance extends Model <CustomerAttributes, CustomerCreationAttributes>,
     CustomerAttributes {
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }
 // let id: number = Math.floor(Math.random() * 100000)
 const Customer = db.define<CustomerInstance>(
@@ -41,12 +43,26 @@ const Customer = db.define<CustomerInstance>(
         },
         partyNumber: {
             allowNull: false,
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         waiting: {
             allowNull: false,
             type: DataTypes.BOOLEAN,
             defaultValue: true
+        },
+        createdAt: {
+            get(this: CustomerInstance): string {
+                var date = new Date(this.getDataValue('createdAt'))
+                return date.toLocaleTimeString()
+            },
+            type: DataTypes.DATE,
+        },
+        updatedAt: {
+            get(this: CustomerInstance): string {
+                var date = new Date(this.getDataValue('updatedAt'))
+                return date.toLocaleTimeString()
+            },
+            type: DataTypes.DATE,
         }
     }
 )
