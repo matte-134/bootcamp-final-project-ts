@@ -17,11 +17,14 @@ const express_1 = __importDefault(require("express"));
 exports.displayRouter = express_1.default.Router();
 const customer_1 = __importDefault(require("../../db/models/customer"));
 exports.displayRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let data = yield customer_1.default.findAll();
+    let data = yield customer_1.default.findAll({
+        where: {
+            waiting: true
+        }
+    });
     let allNames = data.map(getAllNames);
     function getAllNames(name) {
         return name.firstName + ' ' + name.lastName;
     }
-    console.log(data);
     res.send(data);
 }));

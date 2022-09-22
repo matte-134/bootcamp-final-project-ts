@@ -1,0 +1,18 @@
+.inputField {
+    display: flex;
+    margin: 1%;
+}
+
+.tableOptions {
+    display: flex;
+    margin: 1%;
+}
+
+.addCustomer {
+    display: flex;
+    background-color: rgb(141, 141, 242);
+    border: solid black 4px;
+    margin: 4px;
+    justify-content: center;
+    padding: 10px;
+}

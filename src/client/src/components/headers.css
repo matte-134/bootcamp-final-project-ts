@@ -1,0 +1,24 @@
+.headRowW {
+    display: flex;
+    margin: 20pt
+  }
+  
+  .headColumnW {
+    display: flex;
+    flex: 50%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: center;
+  }
+
+.headRowT {
+    display: flex;
+    margin: 20pt
+}
+
+.headColumnT {
+    flex: 33%;
+    display: flex;
+    flex: 50%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: center;
+}

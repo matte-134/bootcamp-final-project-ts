@@ -25,6 +25,11 @@ const Customer = _1.db.define('Customer', {
     partyNumber: {
         allowNull: false,
         type: sequelize_1.DataTypes.INTEGER
+    },
+    waiting: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: true
     }
 });
 exports.default = Customer;

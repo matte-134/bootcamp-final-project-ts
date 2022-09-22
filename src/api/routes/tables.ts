@@ -13,9 +13,11 @@ tablesRouter.put('/:tableNumber', async (req, res) => {
         tableNumber: req.params.tableNumber
     }
     })
-    console.log(req.body)
     let foundCustomer: any = await Customer.findByPk(req.body.id)
     await foundTable.setCustomer(foundCustomer)
+    await foundTable.update({
+        occupied: true
+    })
     res.send("Customer added to table")
 })
 
@@ -29,13 +31,12 @@ tablesRouter.get('/:tableNumber', async (req, res) => {
     })
     if(foundTable.occupied === true) {
         let customer = foundTable.CustomerId
-        let data: any = await Customer.findOne({
+        let data: any = await Customer.findAll({
             where: {
                 id: customer
             }
         })
-        let customerName: string = data.firstName + ' ' + data.lastName
-        res.send(customerName)
+        res.send(data)
     } else {
         res.send('Table unoccupied')
     }
@@ -58,6 +59,14 @@ tablesRouter.put('/:tableNumber/remove', async (req, res) => {
     } else {
         res.send("Table unoccupied")
     }
+})
+
+
+// GET tables 
+
+tablesRouter.get('/', async (req, res) => {
+    let tables = await Tables.findAll()
+    res.send(tables)
 })
 
 // GET tables that are unoccupied

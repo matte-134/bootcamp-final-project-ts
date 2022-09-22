@@ -7,6 +7,7 @@ interface CustomerAttributes {
     lastName: string;
     email: string;
     partyNumber: number;
+    waiting: boolean
 }
 
 interface CustomerCreationAttributes extends Optional<CustomerAttributes, 'id'> {}
@@ -41,6 +42,11 @@ const Customer = db.define<CustomerInstance>(
         partyNumber: {
             allowNull: false,
             type: DataTypes.INTEGER
+        },
+        waiting: {
+            allowNull: false,
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
     }
 )

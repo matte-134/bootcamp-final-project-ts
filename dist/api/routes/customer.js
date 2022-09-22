@@ -22,13 +22,21 @@ exports.customerRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0,
     console.log(req.body);
     res.send("Customer added now");
 }));
-// GET /customer (by first name)
-exports.customerRouter.get("/:firstName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// GET /customer (by id)
+exports.customerRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // let findName: string = req.params.firstName.charAt(0).toUpperCase() + req.params.firstName.slice(1)
     let names = yield customer_1.default.findAll({
         where: {
-            firstName: req.params.firstName
+            id: req.params.id
         }
     });
     res.send(names);
+}));
+//UPDATE waiting status /customer/update
+exports.customerRouter.put("/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield customer_1.default.update({ waiting: false }, {
+        where: {
+            id: req.body.id
+        }
+    });
 }));

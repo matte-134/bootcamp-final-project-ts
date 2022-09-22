@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import './form.css' 
 
 export const Form = () => {
     const [firstName, setFirstName] = useState('')
@@ -29,22 +30,23 @@ export const Form = () => {
 
 
     return (
-        <div>
+        <div className='addCustomer'>
             <form onSubmit={handleSubmit}>
             <h2>
-                Add Customer to waiting List
+                Add Customer to Waiting List
             </h2>
             <div>
-                <input type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)}/>
+                <input className='inputField' type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)} required/>
             </div>
             <div>
-                <input type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)}/>
+                <input className='inputField' type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)} required/>
             </div>
             <div>
-                <input type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <input className='inputField' type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
             </div>
-            <div>
+            <div className='tableOptions'>
                 <select onChange={e => setPartyNumber(parseInt(e.target.value))}>
+                    <option>Select Party Size</option>
                     <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>

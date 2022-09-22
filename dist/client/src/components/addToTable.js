@@ -13,7 +13,6 @@ exports.AddToTable = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 const AddToTable = (customer) => {
-    const [addToTable, setAddToTable] = (0, react_1.useState)(false);
     const [options, setOptions] = (0, react_1.useState)([]);
     const [tNumber, setTNumber] = (0, react_1.useState)('');
     const [custInfo, setCustInfo] = (0, react_1.useState)({});
@@ -30,22 +29,32 @@ const AddToTable = (customer) => {
     (0, react_1.useEffect)(() => {
         getUnoccupidTables();
     }, []);
-    const handleSubmit = (ev, customer) => {
+    (0, react_1.useEffect)(() => {
         setCustInfo(customer);
-        console.log(customer);
-        console.log(custInfo);
+    }, [customer]);
+    const handleSubmit = (ev, customer) => {
         ev.preventDefault();
         const postToTable = (tNumber, custInfo) => __awaiter(void 0, void 0, void 0, function* () {
             const res = yield fetch(`http://localhost:8000/tables/${tNumber}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application.json'
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(custInfo)
+            });
+        });
+        const updateWaitingStatus = (custInfo) => __awaiter(void 0, void 0, void 0, function* () {
+            const res = yield fetch('http://localhost:8000/customer/update', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(custInfo)
             });
         });
         postToTable(tNumber, custInfo);
+        updateWaitingStatus(custInfo);
     };
-    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ onSubmit: e => handleSubmit(e, customer) }, { children: [(0, jsx_runtime_1.jsx)("select", Object.assign({ onChange: e => setTNumber(e.target.value) }, { children: options.map(table => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: table.tableNumber }, { children: table.tableNumber }))) })), (0, jsx_runtime_1.jsx)("button", { children: "Submit" })] })) }));
+    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ onSubmit: e => handleSubmit(e, customer) }, { children: [(0, jsx_runtime_1.jsxs)("select", Object.assign({ onChange: e => setTNumber(e.target.value) }, { children: [(0, jsx_runtime_1.jsx)("option", { children: "Select Table Number" }), options.map(table => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: table.tableNumber }, { children: table.tableNumber })))] })), (0, jsx_runtime_1.jsx)("button", { children: "Submit" })] })) }));
 };
 exports.AddToTable = AddToTable;

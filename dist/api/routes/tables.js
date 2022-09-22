@@ -24,9 +24,11 @@ exports.tablesRouter.put('/:tableNumber', (req, res) => __awaiter(void 0, void 0
             tableNumber: req.params.tableNumber
         }
     });
-    console.log(req.body);
     let foundCustomer = yield customer_1.default.findByPk(req.body.id);
     yield foundTable.setCustomer(foundCustomer);
+    yield foundTable.update({
+        occupied: true
+    });
     res.send("Customer added to table");
 }));
 // GET customer info from table
@@ -38,13 +40,12 @@ exports.tablesRouter.get('/:tableNumber', (req, res) => __awaiter(void 0, void 0
     });
     if (foundTable.occupied === true) {
         let customer = foundTable.CustomerId;
-        let data = yield customer_1.default.findOne({
+        let data = yield customer_1.default.findAll({
             where: {
                 id: customer
             }
         });
-        let customerName = data.firstName + ' ' + data.lastName;
-        res.send(customerName);
+        res.send(data);
     }
     else {
         res.send('Table unoccupied');
@@ -67,6 +68,11 @@ exports.tablesRouter.put('/:tableNumber/remove', (req, res) => __awaiter(void 0,
     else {
         res.send("Table unoccupied");
     }
+}));
+// GET tables 
+exports.tablesRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let tables = yield tables_1.default.findAll();
+    res.send(tables);
 }));
 // GET tables that are unoccupied
 exports.tablesRouter.get('/unoccupied/find', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
